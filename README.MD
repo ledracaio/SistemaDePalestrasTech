@@ -132,9 +132,9 @@ Para acesso em ambiente local:
 
 3. Utilize as seguintes credenciais de desenvolvimento:
 
-Usuário: admin
+- Usuário: admin
 
-Senha: admin
+- Senha: admin
 
 Após o login, o administrador terá controle total sobre a criação de palestras, gerenciamento de vagas e aprovação/reprovação de reservas pendentes em tempo real.
 
