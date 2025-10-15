@@ -94,25 +94,30 @@ Certifique-se de ter o [Node.js](https://nodejs.org/) instalado em seu ambiente.
 
 ### 1. Clonar o Repositório
 
+```bash
 git clone [https://github.com/ledracaio/SistemaDePalestrasTech.git](https://github.com/ledracaio/SistemaDePalestrasTech.git)
 cd SistemaDePalestrasTech
+```
 
 ### 2. Instalar Dependências
 Instale as dependências do frontend e backend:
-
+```bash
 npm install
+```
 
 ### 3. Iniciar o Servidor Socket.IO (Backend)
 Execute o backend para iniciar a comunicação em tempo real:
-
+```bash
 node server/server.js
+```
 
 O servidor estará acessível em http://localhost:3001.
 
 ### 4. Iniciar o Frontend
 Em um novo terminal, inicie a aplicação React:
-
+```bash
 npm run dev
+```
 
 O frontend estará disponível em http://localhost:5173.
 
@@ -128,6 +133,7 @@ Para acesso em ambiente local:
 3. Utilize as seguintes credenciais de desenvolvimento:
 
 Usuário: admin
+
 Senha: admin
 
 Após o login, o administrador terá controle total sobre a criação de palestras, gerenciamento de vagas e aprovação/reprovação de reservas pendentes em tempo real.
