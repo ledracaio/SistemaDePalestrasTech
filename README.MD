@@ -1,7 +1,6 @@
 # 🚀 CharlasCheck — Sistema de Gerenciamento de Inscrições em Palestras de Tecnologia em Tempo Real
 
 [![Desenvolvido por Caio Augusto Ledra](https://img.shields.io/badge/Desenvolvido%20por-Caio%20Augusto%20Ledra-007ACC?style=flat-square)](https://github.com/ledracaio)
-[![Licença MIT](https://img.shields.io/badge/Licen%C3%A7a-MIT-green?style=flat-square)](LICENSE)
 [![Frontend: React](https://img.shields.io/badge/Frontend-React%20%2B%20TS%20%2B%20TailwindCSS-61DAFB?style=flat-square&logo=react)](https://react.dev/)
 [![Backend: Node.js](https://img.shields.io/badge/Backend-Node.js%20%2B%20Socket.IO-339933?style=flat-square&logo=node.js)](https://nodejs.org/)
 [![Comunicação: Socket.IO](https://img.shields.io/badge/Comunica%C3%A7%C3%A3o-Socket.IO-010101?style=flat-square&logo=socket.io)](https://socket.io/)
