@@ -153,4 +153,4 @@ function broadcastEstado() {
 }
 
 // Inicia servidor na porta 3001
-httpServer.listen(3001, () => console.log("Servidor Socket.IO rodando em http://localhost:3001"));
+httpServer.listen(process.env.PORT || 3001, () => console.log("Servidor Socket.IO rodando em http://localhost:3001"));
