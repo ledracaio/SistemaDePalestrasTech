@@ -4,7 +4,8 @@ import { Palestra, Reserva } from "../types";
 import { PlusCircle, Users, CheckCircle, Clock, XCircle, Activity } from "lucide-react";
 
 // Cria conexão Socket.IO com o servidor
-const socket = io("http://localhost:3001");
+const backendUrl = import.meta.env.VITE_BACKEND_URL || "http://localhost:3001";
+const socket = io(backendUrl);
 
 // Componente do painel administrativo
 export default function AdminPanel() {
