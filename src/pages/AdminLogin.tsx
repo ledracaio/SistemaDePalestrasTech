@@ -3,7 +3,8 @@ import { io } from "socket.io-client";
 import { Lock, User } from "lucide-react";
 
 // Cria uma conexão Socket.IO com o servidor
-const socket = io("http://localhost:3001");
+const backendUrl = import.meta.env.VITE_BACKEND_URL || "http://localhost:3001";
+const socket = io(backendUrl);
 
 // Props do componente: callback chamado quando login é bem-sucedido
 interface AdminLoginProps {
