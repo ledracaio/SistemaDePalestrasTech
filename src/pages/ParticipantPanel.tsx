@@ -4,7 +4,8 @@ import { Palestra, Reserva } from "../types";
 import { GraduationCap, ClipboardList, XCircle, Activity, LogIn } from "lucide-react";
 
 // Cria a conexão com o servidor Socket.IO
-const socket = io("http://localhost:3001");
+const backendUrl = import.meta.env.VITE_BACKEND_URL || "http://localhost:3001";
+const socket = io(backendUrl);
 
 interface ParticipantPanelProps {
   onAdminAccess: () => void; // Função chamada ao clicar no botão de acesso administrativo
