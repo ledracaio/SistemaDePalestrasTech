@@ -3,40 +3,50 @@ import { io } from "socket.io-client";
 import { Palestra, Reserva } from "../types";
 import { PlusCircle, Users, CheckCircle, Clock, XCircle, Activity } from "lucide-react";
 
+// Cria conexão Socket.IO com o servidor
 const socket = io("http://localhost:3001");
 
+// Componente do painel administrativo
 export default function AdminPanel() {
-  const [palestras, setPalestras] = useState<Palestra[]>([]);
-  const [reservas, setReservas] = useState<Reserva[]>([]);
-  const [logs, setLogs] = useState<any[]>([]);
-  const [novoTitulo, setNovoTitulo] = useState("");
-  const [novoVagas, setNovoVagas] = useState(1);
+  // Estados do painel
+  const [palestras, setPalestras] = useState<Palestra[]>([]); // Lista de palestras
+  const [reservas, setReservas] = useState<Reserva[]>([]);    // Lista de reservas
+  const [logs, setLogs] = useState<any[]>([]);               // Lista de logs de eventos
+  const [novoTitulo, setNovoTitulo] = useState("");          // Input do título da nova palestra
+  const [novoVagas, setNovoVagas] = useState(1);             // Input de vagas da nova palestra
 
+  // Hook para ouvir eventos do servidor
   useEffect(() => {
-    socket.on("estado.atualizado", setPalestras);
-    socket.on("reservas.atualizadas", setReservas);
-    socket.on("novo.log", (log) => setLogs(prev => [log, ...prev]));
+    socket.on("estado.atualizado", setPalestras); // Atualiza lista de palestras
+    socket.on("reservas.atualizadas", setReservas); // Atualiza lista de reservas
+    socket.on("novo.log", (log) => setLogs(prev => [log, ...prev])); // Adiciona novo log no topo
     return () => {
+      // Remove listeners ao desmontar componente
       socket.off("estado.atualizado", setPalestras);
       socket.off("reservas.atualizadas", setReservas);
       socket.off("novo.log");
     };
   }, []);
 
+  // Cria nova palestra
   const handleCriarPalestra = (e: React.FormEvent) => {
     e.preventDefault();
     if (novoTitulo.trim() && novoVagas > 0) {
       socket.emit("palestra.aberta", { titulo: novoTitulo.trim(), vagas: novoVagas });
-      setNovoTitulo("");
-      setNovoVagas(1);
+      setNovoTitulo(""); // Limpa input de título
+      setNovoVagas(1);   // Reseta número de vagas
     }
   };
 
+  // Aprovar ou reprovar reservas
   const handleAtualizarReserva = (reservaId: string, aprovar: boolean) => {
     socket.emit("reserva.atualizar", { reservaId, aprovar });
   };
 
+  // Filtra reservas pendentes
   const reservasPendentes = reservas.filter(r => r.status === "pendente");
+
+  // Agrupa reservas pendentes por usuário e palestra
   const reservasAgrupadas = reservasPendentes.reduce((acc: Record<string, Reserva[]>, r) => {
     const key = `${r.user_id}-${r.palestra_id}`;
     if (!acc[key]) acc[key] = [];
@@ -64,7 +74,9 @@ export default function AdminPanel() {
             <PlusCircle className="w-5 h-5 mr-2 text-indigo-600" /> Criar Nova Palestra
           </h2>
 
+          {/* Formulário de criação de palestra */}
           <form onSubmit={handleCriarPalestra} className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {/* Input título */}
             <div className="flex flex-col">
               <label className="font-medium text-sm text-gray-600">Título</label>
               <input
@@ -77,6 +89,7 @@ export default function AdminPanel() {
               />
             </div>
 
+            {/* Input vagas */}
             <div className="flex flex-col">
               <label className="font-medium text-sm text-gray-600">Vagas</label>
               <input
@@ -89,6 +102,7 @@ export default function AdminPanel() {
               />
             </div>
 
+            {/* Botão criar */}
             <div className="flex items-end">
               <button
                 type="submit"
@@ -153,6 +167,7 @@ export default function AdminPanel() {
                         Usuário: {group[0].user_id} — Vagas: {group.length}
                       </p>
                     </div>
+                    {/* Botões aprovar/reprovar todas reservas do grupo */}
                     <div className="flex gap-2">
                       <button
                         className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded flex items-center gap-1"
